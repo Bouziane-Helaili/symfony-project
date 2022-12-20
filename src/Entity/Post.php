@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
@@ -13,8 +15,85 @@ class Post
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $content = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'posts')]
+    private Collection $categories;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
     }
 }
