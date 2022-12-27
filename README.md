@@ -4,5 +4,12 @@
 
  Mettre à jour les infos de la BDD dans le fichier .env
 
- Créer les controllers avec la commande `symfony console make:controller`
+* A travers le panneau de commande
+
+Créer les controllers, les tables et définir les types de relation
+
+Faire la migration vers la BDD
+
+
+
  
