@@ -10,6 +10,8 @@ Créer les controllers, les tables et définir les types de relation
 
 Faire la migration vers la BDD
 
+Gestion de la session avec $request
+
 
 
  
