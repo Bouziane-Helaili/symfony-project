@@ -10,7 +10,9 @@
 
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
-
+{% for message in app.session.flashBag.get('info') %}
+    <div class="alert alert-info"></div>
+{% endfor %}
     This friendly message is coming from:
     <ul>
         <li>Your controller at <code><a href="{{ 'C:/Users/alger/Desktop/symfonyProject/src/Controller/FirstController.php'|file_link(0) }}">src/Controller/FirstController.php</a></code></li>
