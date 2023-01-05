@@ -15,3 +15,10 @@ J'ai rempli la BDD directement dans phpMyAdmin et pour le mdp, je l'ai hashé à
 `symfony console sec:hash`
 6. Les autorisations d'accès aux pages selon le rôle peuvent être gérées 
 -> sur config/packages/security.yaml
+ access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }
+-> sur config/packages/security.yaml, sous security
+role_hierarchy:
+    ROLE_ADMIN: ROLE_USER
+Cela veut dire que le ROLE_ADMIN aura toutes les autorisations d'accès que le ROLE_USER
