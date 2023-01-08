@@ -56,3 +56,13 @@ Il faut rajouter
 5. Dans le fichier webpack.config.js, je décommente  `//.enableSassLoader()` et je suis ce qui met indiqué dans le terminal,
 mettre la commande `npm install sass-loader@^13.0.0 sass --save-dev` et relancer `npm run dev`
 
+## Création entity Product et CRUD
+1. `symfony console m:entity`
+2. `symfony console m:crud`
+Si problème de migration
+1. Supprimer le fichier dans dossier migrations
+2. Effacer base de donner et refaire à partir de zéro
+Sinon
+1. Forcer la mise à jour de la BDD avec `php bin/console doctrine:schema:update --f`
+
+
