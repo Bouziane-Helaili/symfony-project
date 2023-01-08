@@ -63,6 +63,23 @@ Si problème de migration
 1. Supprimer le fichier dans dossier migrations
 2. Effacer base de donner et refaire à partir de zéro
 Sinon
-1. Forcer la mise à jour de la BDD avec `php bin/console doctrine:schema:update --f`
+1. Forcer la mise à jour de la BDD avec `php bin/console doctrine:schema:update -f`
+
+## Création de fixtures (jeu de données) pour les produits
+Suivre documentation `fixtures symfony`
+1. `composer require --dev orm-fixtures`
+2. Installation de la librairie faker en mode dev `composer require fakerphp/faker --dev`
+3. Faire appel à faker dans la méthode du fichir DataFixtures/Appfixtures `$faker = Factory::create();`
+4. Rajouter les chemins, `use Faker\Factory;` pour Faker et `use App\Entity\Product;` pour Product
+5. Exemple d'utilisation dans la méthode du fichier DataFixtures/Appfixtures
+ $faker = Factory::create('fr_FR');
+        for ($i=0 ; $i<10 ; $i++){
+            $product = new Product();
+            $product->setName($faker->words(random_int(2,4), true));
+            $product->setPrice($faker->randomFloat(1,2));
+            $product->setDescription($faker->paragraphs(random_int(2,3), true));
+
+            $manager->persist($product)
+6. Pour remplir la BDD, lancer ` symfony console doctrine:fixtures:load `
 
 
